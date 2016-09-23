@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         colors="true"
+         bootstrap="vendor/autoload.php">
+    <testsuites>
+        <testsuite name="SqlBuilder Test Suite">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./lib</directory>
+        </whitelist>
+    </filter>
+</phpunit>
