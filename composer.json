@@ -1,0 +1,26 @@
+{
+    "name" : "inglar/sql-builder",
+    "description" : "",
+    "type" : "library",
+    "license" : "MIT",
+    "authors" : [{
+        "name" : "Igor Kochergin",
+        "email" : "inglar2k@gmail.com"
+    }],
+    "require" : {
+        "php": ">=5.5.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8 || ^5.1"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "SqlBuilder\\" : "lib/SqlBuilder/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SqlBuilder\\Tests\\": "tests/SqlBuilder/"
+        }
+    }
+}
