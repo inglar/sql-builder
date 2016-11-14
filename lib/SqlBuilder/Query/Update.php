@@ -74,7 +74,8 @@ class Update
 
     /**
      * @param string $column
-     * @param int|string|null $value
+     * @param int|string|null|array $value
+     *  [1, Update::OPERATOR_ADDITION] will be converted to "column = column + 1"
      * @return $this
      */
     public function column($column, $value)
