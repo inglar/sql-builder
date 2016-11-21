@@ -305,6 +305,10 @@ class Select
      */
     public function bindParam($key, $value, $overwrite = false)
     {
+        if (preg_match('/[^:\w\d_]/', $key)) {
+            throw new \InvalidArgumentException("Symbols except letters, digits and underscore not allowed in bind parameter key");
+        }
+
         if (!$overwrite && isset($this->bindParams[$key])) {
             throw new SqlBuilderException("Bind parameter key '$key' already set");
         }
@@ -605,7 +609,7 @@ class Select
     private function replaceArrayParameterPlaceholders($sql)
     {
         foreach ($this->replacePlaceholders as $key => $value) {
-            $sql = str_replace($key, $value, $sql);
+            $sql = preg_replace('/' . preg_quote($key) . '([^\w\d_])/', $value . '$1', $sql);
         }
 
         return $sql;

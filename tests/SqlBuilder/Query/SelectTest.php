@@ -708,6 +708,22 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, $bindParams[':status_id1']);
         $this->assertArrayHasKey(':status_id2', $bindParams);
         $this->assertEquals(3, $bindParams[':status_id2']);
+
+        $select = new Select($this->db);
+        $select
+            ->column('*')
+            ->from('user')
+            ->where('type_id <> :type_id2_32')
+            ->where('type_id IN (:type_id)')
+            ->bindParams([
+                ':type_id2_32' => 10,
+                ':type_id' => [1, 2, 3],
+            ]);
+
+        $this->assertEquals(
+            'SELECT * FROM "user" WHERE type_id <> :type_id2_32 AND type_id IN (:type_id1, :type_id2, :type_id3)',
+            (string)$select
+        );
     }
 
     /**
