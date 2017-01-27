@@ -25,7 +25,7 @@ SqlBuilder supports the following database adapters:
 Usage
 =====
 
-Simple select
+**Simple select**
 
 ```php
 $builder = new SqlBuilder('pgsql');
@@ -34,9 +34,23 @@ $select = $builder->select()
     ->from('table')
     ->where('id = :id')
     ->bindParam(':id', 123);
+ 
+echo $select;
+print_r($select->getBindParams());
 ```
 
-Select with join
+The above example will output:
+
+```text
+SELECT * FROM "table" WHERE id = :id
+ 
+Array
+(
+    [:id] => 123
+)
+```
+
+**Select with join**
 
 ```php
 $builder = new SqlBuilder('pgsql');
@@ -46,4 +60,18 @@ $select = $builder->select()
     ->join($builder->join('table2', "table2.user_id = table.id")
     ->where('id = :id')
     ->bindParam(':id', 123);
+ 
+echo $select;
+print_r($select->getBindParams());
+```
+
+The above example will output:
+
+```text
+SELECT * FROM "table" JOIN "table2" ON table2.user_id = table.id WHERE id = :id
+ 
+Array
+(
+    [:id] => 123
+)
 ```
